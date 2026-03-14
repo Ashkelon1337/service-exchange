@@ -1,6 +1,8 @@
 # 🛠 Service Exchange System
 
 Комплексная система для обмена услугами, объединяющая в себе Telegram-бота для пользователей и REST API с админ-панелью для управления данными.
+**[Попробовать бота(https://t.me/Ashkelon_Service_Bot)**
+
 
 ## 🚀 Стек технологий
 * **Backend:** FastAPI (Python 3.11+)
@@ -26,3 +28,4 @@
 * `run.py` — единая точка входа, объединяющая FastAPI и aiogram через Webhooks.
 * `config.py` — конфигурация переменных окружения и подключение к БД.
 
+[![Telegram](https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/Ashkelon_Service_Bot)
