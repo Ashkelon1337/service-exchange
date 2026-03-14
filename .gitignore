@@ -1,0 +1,14 @@
+
+.venv/
+
+.env
+creds.json
+*.json
+
+*.db
+*.sqlite3
+
+__pycache__/
+*.pyc
+
+.idea/
