@@ -1,7 +1,7 @@
 from sqlalchemy import ForeignKey, Integer, String, BigInteger
 from sqlalchemy.orm import Mapped, mapped_column, DeclarativeBase
 from sqlalchemy.ext.asyncio import async_sessionmaker, create_async_engine
-from datetime import datetime
+
 from config import DATABASE_URL
 
 engine = create_async_engine(url=DATABASE_URL, echo=True)
