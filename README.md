@@ -1,7 +1,7 @@
 # 🛠 Service Exchange System
 
 Комплексная система для обмена услугами, объединяющая в себе Telegram-бота для пользователей и REST API с админ-панелью для управления данными.
-👉**[Попробовать бота(https://t.me/Ashkelon_Service_Bot)**👈
+👉https://t.me/Ashkelon_Service_Bot👈
 
 
 ## 🚀 Стек технологий
