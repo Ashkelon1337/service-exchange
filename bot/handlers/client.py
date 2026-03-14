@@ -37,12 +37,13 @@ async def process_comment(message: Message, state: FSMContext):
     service_id = data.get('service_id')
     service = await rq.get_service(service_id)
     client = await rq.get_user(message.from_user.id)
+    safe_comment = message.text or 'Без комментария'
 
     order_id = await rq.create_order(
         client_id=client.id,
         executor_id=service.user_id,
         service_id=service_id,
-        comment=message.text
+        comment=safe_comment
     )
 
     executor = await rq.get_user_by_id(service.user_id)
