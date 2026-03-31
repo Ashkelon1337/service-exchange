@@ -40,5 +40,5 @@ admin_cancel = InlineKeyboardMarkup(inline_keyboard=[
 ])
 def delete_service(service_id):
     return InlineKeyboardMarkup(inline_keyboard=[
-    [InlineKeyboardButton(text='Удалить', callback_data=f'detail_{service_id}')]
+    [InlineKeyboardButton(text='Удалить', callback_data=f'delete_{service_id}')]
 ])
