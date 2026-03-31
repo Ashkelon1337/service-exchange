@@ -24,4 +24,5 @@ admin_menu = ReplyKeyboardMarkup(keyboard=[
     [KeyboardButton(text="📊 Статистика")],
     [KeyboardButton(text="📤 Рассылка")],
     [KeyboardButton(text="👥 Пользователи")],
+    [KeyboardButton(text="Услуги")]
 ], resize_keyboard=True, is_persistent=True)

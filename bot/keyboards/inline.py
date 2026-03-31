@@ -38,3 +38,7 @@ admin_get_users = InlineKeyboardMarkup(inline_keyboard=[
 admin_cancel = InlineKeyboardMarkup(inline_keyboard=[
     [InlineKeyboardButton(text='Назад', callback_data='cancel')]
 ])
+def delete_service(service_id):
+    return InlineKeyboardMarkup(inline_keyboard=[
+    [InlineKeyboardButton(text='Удалить', callback_data=f'detail_{service_id}')]
+])

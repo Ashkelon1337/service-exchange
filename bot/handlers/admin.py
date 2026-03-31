@@ -130,3 +130,20 @@ async def list_users(callback: CallbackQuery):
         text += f"#{user.id} | {user.tg_id} | {user.name} | {user.role}\n"
     await callback.message.edit_text(text=text)
     await callback.answer()
+@router.message(F.text == "Услуги")
+async def get_services(message: Message):
+    services = await rq.get_all_services()
+    if not services:
+        await message.answer("😢 Пока нет услуг")
+        return
+    for service in services:
+        user = await rq.get_user_by_id(service.user_id)
+        text = f'🔹 {service.title}\n💰 {service.price}₽\n👤 {user.name}'
+        await message.answer(text=text, reply_markup=inline.detail(service.id))
+@router.callback_query(F.data.startswith)
+async def delete_service(callback: CallbackQuery):
+    service_id = int(callback.data.split('_')[1])
+    await rq.delete_service(service_id)
+    await callback.message.delete()
+    text = await get_admin_panel()
+    await callback.message.answer(text=text, reply_markup=reply.admin_menu)
