@@ -76,6 +76,7 @@ async def update_service(service_id, title, description, price):
         await session.commit()
 async def delete_service(service_id):
     async with async_session() as session:
+        await session.execute(delete(Order).where(Order.service_id == service_id))
         await session.execute(delete(Service).where(Service.id == service_id))
         await session.commit()
 
