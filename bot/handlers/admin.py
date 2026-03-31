@@ -139,7 +139,7 @@ async def get_services(message: Message):
     for service in services:
         user = await rq.get_user_by_id(service.user_id)
         text = f'🔹 {service.title}\n💰 {service.price}₽\n👤 {user.name}'
-        await message.answer(text=text, reply_markup=inline.detail(service.id))
+        await message.answer(text=text, reply_markup=inline.delete_service(service.id))
 @router.callback_query(F.data.startswith)
 async def delete_service(callback: CallbackQuery):
     service_id = int(callback.data.split('_')[1])
