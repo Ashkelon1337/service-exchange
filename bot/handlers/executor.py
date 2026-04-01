@@ -34,6 +34,8 @@ async def complete_order_handler(callback: CallbackQuery):
                                     )
     await callback.message.edit_text(text=callback.message.text + '\n\n✅ Заказ выполнен', reply_markup=None)
     await callback.answer("✅ Заказ отмечен как выполненный")
+
+
 @router.message(F.text == '➕ Создать услугу')
 async def create_service_start(message: Message, state: FSMContext):
     await state.set_state(CreateService.title)

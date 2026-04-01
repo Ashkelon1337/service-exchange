@@ -1,6 +1,6 @@
 from aiogram import Router, F
 from aiogram.types import Message, CallbackQuery
-
+from bot.keyboards.inline import show_orders
 import database.requests as rq
 from utils import order_display
 
@@ -9,12 +9,35 @@ router = Router()
 @router.message(F.text == '📦 Мои заказы')
 async def show_my_orders(message: Message):
     user = await rq.get_user(message.from_user.id)
-    if user.role == 'client':
-        orders = await rq.get_client_orders(user.id)
-        await order_display.show_client_orders(message, orders)
+    orders = await rq.get_client_orders(user.id)
+    new_orders = []
+    in_process = []
+    complete_orders = []
+    canceled = []
+    if not orders:
+        await message.answer(text='У вас нет заказов')
+        return
+    for order in orders:
+        if order.status == 'new':
+            new_orders.append(order)
+        elif order.status == 'in_process':
+            in_process.append(order)
+        elif order.status == 'cancelled':
+            canceled.append(order)
+        elif order.status == 'completed':
+            complete_orders.append(order)
+    text = f'У вас есть {len(orders)} заказов\n{new_orders} Новых заказов\n{in_process} Заказов в процессе\n{cancel_order} Заказов отклоненных\n{complete_orders} Заказов выполненных'
+    await message.answer(text=text, reply_markup=show_orders)
+
+@router.callback_query(F.data.startswith('show_'))
+async def show_new_orders(callback: CallbackQuery):
+    status = int(callback.data.split('_')[1])
+    user = await rq.get_user(callback.from_user.id)
+    orders = await rq.get_orders_by_status(status=status, user_id=user.id)
+    if user.role == 'executor':
+        await order_display.show_executor_orders(message=callback.message, orders=orders)
     else:
-        orders = await rq.get_executor_orders(user.id)
-        await order_display.show_executor_orders(message, orders)
+        await order_display.show_client_orders(message=callback.message, orders=orders)
 
 @router.callback_query(F.data.startswith('cancel_'))
 async def cancel_order(callback: CallbackQuery):

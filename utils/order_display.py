@@ -14,10 +14,7 @@ async def show_client_orders(message: Message, orders):
         text += f"📌 Услуга: {service.title}\n"
         text += f"👤 Исполнитель: {user.name}\n"
         text += f"📊 Статус: {order.status}\n"
-        if order.status == 'new':
-            keyboard = inline.cancel_order_client(order.id)
-        else:
-            keyboard = None
+        keyboard = inline.cancel_order_client(order.id)
         await message.answer(text=text, reply_markup=keyboard)
 
 

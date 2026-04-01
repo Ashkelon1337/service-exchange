@@ -42,3 +42,10 @@ def delete_service(service_id):
     return InlineKeyboardMarkup(inline_keyboard=[
     [InlineKeyboardButton(text='Удалить', callback_data=f'delete_{service_id}')]
 ])
+
+show_orders = InlineKeyboardMarkup(inline_keyboard=[
+    [InlineKeyboardButton(text='Показать новые заказы', callback_data='show_new')],
+    [InlineKeyboardButton(text='Показать заказы в процессе', callback_data="show_in_process")],
+    [InlineKeyboardButton(text='Показать отклонённые', callback_data='show_cancelled')],
+    [InlineKeyboardButton(text='Показать выполненные задачи', callback_data='show_completed')],
+])
