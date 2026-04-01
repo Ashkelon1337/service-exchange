@@ -26,13 +26,14 @@ async def show_my_orders(message: Message):
             canceled.append(order)
         elif order.status == 'completed':
             complete_orders.append(order)
-    text = f'У вас есть {len(orders)} заказов\n{len(new_orders)} Новых заказов\n{len(in_process)} Заказов в процессе\n{len(canceled)} Заказов отклоненных\n{len(complete_orders)} Заказов выполненных'
+    text = f'Заказов всего - {len(orders)}\n{len(new_orders)} Новых\n{len(in_process)} В процессе\n{len(canceled)} Отклоненных\n{len(complete_orders)} Выполненных'
     await message.answer(text=text, reply_markup=show_orders)
 
 @router.callback_query(F.data.startswith('show_'))
 async def show_new_orders(callback: CallbackQuery):
     status = callback.data.split('_')[1:]
     status = ''.join(status)
+    print(status)
     user = await rq.get_user(callback.from_user.id)
     orders = await rq.get_orders_by_status(status=status, user_id=user.id)
     if user.role == 'executor':
