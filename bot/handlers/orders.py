@@ -8,6 +8,7 @@ router = Router()
 
 @router.message(F.text == '📦 Мои заказы')
 async def show_my_orders(message: Message):
+    await message.answer()
     user = await rq.get_user(message.from_user.id)
     orders = await rq.get_user_order(user.id)
     new_orders = []
@@ -31,9 +32,7 @@ async def show_my_orders(message: Message):
 
 @router.callback_query(F.data.startswith('show_'))
 async def show_new_orders(callback: CallbackQuery):
-    status = callback.data.split('_')[1:]
-    status = ''.join(status)
-    print(status)
+    status = callback.data.replace('show_', '')
     user = await rq.get_user(callback.from_user.id)
     orders = await rq.get_orders_by_status(status=status, user_id=user.id)
     if user.role == 'executor':
