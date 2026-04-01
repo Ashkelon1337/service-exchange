@@ -121,6 +121,7 @@ async def get_orders():
 async def get_user_order(user_id):
     async with async_session() as session:
         orders = await session.scalars(select(Order).where(or_(Order.executor_id == user_id, Order.client_id == user_id)))
+        return orders.all()
 async def get_orders_by_status(status, user_id):
     async with async_session() as session:
         orders = await session.scalars(select(Order).where(and_(or_(Order.executor_id == user_id, Order.client_id == user_id), Order.status == status)))
