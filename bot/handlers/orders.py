@@ -9,7 +9,7 @@ router = Router()
 @router.message(F.text == '📦 Мои заказы')
 async def show_my_orders(message: Message):
     user = await rq.get_user(message.from_user.id)
-    orders = await rq.get_client_orders(user.id)
+    orders = await rq.get_user_order(user.id)
     new_orders = []
     in_process = []
     complete_orders = []
@@ -26,7 +26,7 @@ async def show_my_orders(message: Message):
             canceled.append(order)
         elif order.status == 'completed':
             complete_orders.append(order)
-    text = f'У вас есть {len(orders)} заказов\n{new_orders} Новых заказов\n{in_process} Заказов в процессе\n{cancel_order} Заказов отклоненных\n{complete_orders} Заказов выполненных'
+    text = f'У вас есть {len(orders)} заказов\n{new_orders} Новых заказов\n{len(in_process)} Заказов в процессе\n{len(canceled)} Заказов отклоненных\n{len(complete_orders)} Заказов выполненных'
     await message.answer(text=text, reply_markup=show_orders)
 
 @router.callback_query(F.data.startswith('show_'))
