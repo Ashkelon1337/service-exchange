@@ -1,31 +1,38 @@
 # 🛠 Service Exchange System
 
-Комплексная система для обмена услугами, объединяющая в себе Telegram-бота для пользователей и REST API с админ-панелью для управления данными.
-👉https://t.me/Ashkelon_Service_Bot👈
+A comprehensive service exchange platform that integrates a Telegram bot for end-users with a robust REST API and an admin dashboard for data management. 
 
+👉 **Live Demo:** [Ashkelon Service Bot](https://t.me/Ashkelon_Service_Bot)
 
-## 🚀 Стек технологий
+---
+
+## 🚀 Tech Stack
+
 * **Backend:** FastAPI (Python 3.11+)
-* **Бот:** aiogram 3.x (на Webhooks)
-* **База данных:** PostgreSQL
+* **Telegram Bot:** aiogram 3.x (driven by Webhooks)
+* **Database:** PostgreSQL
 * **ORM:** SQLAlchemy 2.0 (Async)
-* **Админ-панель:** SQLAdmin
-* **Деплой:** Render
+* **Admin Interface:** SQLAdmin
+* **Deployment / Hosting:** Render
 
-## 🏗 Архитектура проекта
-Проект запущен в едином процессе на Render, что позволяет экономить ресурсы и обеспечивать мгновенную синхронизацию между ботом и API.
+---
 
+## 🏗 Project Architecture
 
+The entire application runs as a **single process on Render**. This architectural choice drastically reduces resource consumption and ensures instant, real-time data synchronization between the Telegram bot and the REST API.
 
-* **API:** Предоставляет эндпоинты для получения списка услуг и пользователей.
-* **Бот:** Взаимодействует с клиентами и исполнителями через Telegram.
-* **Admin:** Встроенная панель управления (доступна по ADMIN_IDS), позволяющая управлять проектом прямо из телеграмма. А также интерфейс по адресу /admin для полного контроля над записями БД через браузер.
+* **API:** Exposes secure endpoints to retrieve and manage services and user profiles.
+* **Telegram Bot:** Acts as the primary interface, handling real-time interactions between clients and service providers.
+* **Admin Panel:** Features a built-in management interface accessible via designated `ADMIN_IDS` directly in Telegram, alongside a full-scale web interface at `/admin` for comprehensive browser-based database control.
 
-## 📁 Структура папок
-* `api/` — логика FastAPI, эндпоинты и настройки админки.
-* `bot/` — хендлеры, клавиатуры и логика Telegram-бота.
-* `database/` — модели SQLAlchemy, миграции и асинхронные запросы к БД.
-* `run.py` — единая точка входа, объединяющая FastAPI и aiogram через Webhooks.
-* `config.py` — конфигурация переменных окружения и подключение к БД.
+---
+
+## 📁 Directory Structure
+
+* `api/` — FastAPI core logic, route endpoints, and web admin configurations.
+* `bot/` — Telegram bot handlers, custom keyboards, and conversation flow logic.
+* `database/` — Async SQLAlchemy models, database connections, and migrations.
+* `run.py` — The unified application entry point combining FastAPI and aiogram via Webhooks.
+* `config.py` — Environment variables management and database connection setups.
 
 [![Telegram](https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/Ashkelon_Service_Bot)
